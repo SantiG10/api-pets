@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 (async () => {
   console.log("Connect DB...");
   await mongoose.connect(
-    "mongodb+srv://admin:admin@cluster0.93eei.mongodb.net/veterinaria?retryWrites=true&w=majority",
+    "<STRING-CONNECTION_MONGO>",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
