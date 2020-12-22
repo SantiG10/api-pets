@@ -79,6 +79,11 @@ const crear = function closureCrearEntidad({ Modelo = null }) {
       return res.status(200).json(entidad);
     } catch (error) {
       console.log({ error });
+      if (error.name === "MongoError" && error.code === 11000) {
+        return res.status(400).json({
+          mensaje: `ya existe otra entidad con el documento ${req.body.documento}!`,
+        });
+      }
       return res.status(500).json({ mensaje: error.message });
     }
   };
@@ -104,7 +109,12 @@ const editar = function closureEditarEntidad({ Modelo = null }) {
       const entidad = await Modelo.findOneAndUpdate({ _id }, { $set: datosNuevos }, { new: true, useFindAndModify: false });
       return res.status(200).json(entidad);
     } catch (error) {
-      console.log({ error })
+      console.log({ error });
+      if (error.name === "MongoError" && error.code === 11000) {
+        return res.status(400).json({
+          mensaje: `ya existe otra entidad con el documento ${req.body.documento}!`,
+        });
+      }
       return res.status(500).json({ mensaje: error.message });
     }
   }

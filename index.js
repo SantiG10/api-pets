@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require('cors');
 const connection = require("./db");
 connection();
 const rutas = require("./rutas");
@@ -8,6 +9,7 @@ const port = 5000;
 
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cors());
 
 rutas(app);
 

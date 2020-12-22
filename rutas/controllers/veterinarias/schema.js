@@ -12,7 +12,8 @@ const veterinariaSchema = new Schema({
   },
   telefono: {
     type: Number,
-    required: true
+    required: true,
+    unique: true
   }
 },
   {
